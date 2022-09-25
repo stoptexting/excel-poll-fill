@@ -1,9 +1,11 @@
 import requests
 import random
-import pandas 
+import pandas as pd
 
 url = "https://api.namefake.com/french-france/male/"
 postal_codes = (76000, 76100, 76200, 76300, 76400, 76910)
+sondage = pd.read_excel('Sondage.xlsx', sheet_name='Feuil2')
+aliments = pd.read_excel('Aliments.xlsx') # Read once
 
 class Person:
     def __init__(self, nom, prenom, birth, address, postal_code, phone):
@@ -16,6 +18,10 @@ class Person:
 
     def infos(self):
         print('Nom : {}\nPrenom : {}\nDate de Naissance : {}\nAddresse : {}\nCode Postal : {}\nNuméro de Téléphone : {}\n'.format(self.nom, self.prenom, self.birth, self.address, self.postal_code, self.phone))
+
+
+def randAlimCode():
+    return aliments.alim_code[random.randrange(0, len(aliments.alim_code))]
 
 def gen_id():
     data = requests.get(url)
@@ -32,6 +38,7 @@ def gen_id():
 
 
 def main():
+    print("lol rand", randAlimCode())
     p = gen_id()
     print(p.infos())
 
