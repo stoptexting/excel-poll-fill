@@ -35,7 +35,7 @@ def gen_id():
     
     return Person(nom, prenom, birth, address, postal_code, phone)
 
-
+# todo : add 10 aliments to the person, and write to the excel
 
 def main():
     print("lol rand", randAlimCode())
