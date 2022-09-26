@@ -1,2 +1,3 @@
-# excel poll fill
- Generate persons and fill excel
+# Excel Poll Fill
+
+> py ./filler.py
