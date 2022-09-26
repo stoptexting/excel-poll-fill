@@ -6,7 +6,9 @@ url = "https://api.namefake.com/french-france/male/"
 postal_codes = (76000, 76100, 76200, 76300, 76400, 76910)
 sondage = pd.read_excel('Sondage.xlsx', sheet_name='Feuil2')
 aliments = pd.read_excel('Aliments.xlsx') # Read once
+MAX_ALIMENTS = 10
 
+# Person class structure
 class Person:
     def __init__(self, nom, prenom, birth, address, postal_code, phone):
         self.nom = nom
@@ -15,14 +17,31 @@ class Person:
         self.address = address
         self.postal_code = postal_code
         self.phone = phone
+        self.aliments = []
+        self.code_cli = self.format_codecli()
+        self.getAliments()
+
+    def format_codecli(self):
+        return self.prenom[0:2].upper() + self.nom[0:3] if self.nom[2] != " " else self.prenom[0:2].upper() + self.nom[0:2] + self.nom[3]
+
+    def getAliments(self):
+        while len(self.aliments) != MAX_ALIMENTS:
+            rand = randAlimCode()
+            if (rand not in self.aliments):
+                self.aliments.append(rand)
+
 
     def infos(self):
         print('Nom : {}\nPrenom : {}\nDate de Naissance : {}\nAddresse : {}\nCode Postal : {}\nNuméro de Téléphone : {}\n'.format(self.nom, self.prenom, self.birth, self.address, self.postal_code, self.phone))
+        print("Aliments choisis :", self.aliments)
+        print("Code CLI : ", self.code_cli)
 
-
+# Get a random aliment code from the excel database
 def randAlimCode():
     return aliments.alim_code[random.randrange(0, len(aliments.alim_code))]
 
+
+# Generate a new identity
 def gen_id():
     data = requests.get(url)
     data = data.json()
@@ -35,23 +54,17 @@ def gen_id():
     
     return Person(nom, prenom, birth, address, postal_code, phone)
 
+
+# Fill the Excel with a person (add on another line)
+def fill_excel(p: Person):
+    pass
+
 # todo : add 10 aliments to the person, and write to the excel
 
 def main():
-    print("lol rand", randAlimCode())
     p = gen_id()
     print(p.infos())
 
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
