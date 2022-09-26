@@ -3,6 +3,7 @@ from socket import SO_DEBUG
 import requests
 import random
 import pandas as pd
+import openpyxl
 
 url = "https://api.namefake.com/french-france/male/"
 postal_codes = (76000, 76100, 76200, 76300, 76400, 76910)
@@ -54,9 +55,7 @@ class Person:
         elements = [self.admin, self.nom, self.prenom, self.birth, self.address, self.postal_code, self.city, self.phone, self.aliments[0], self.aliments[1], self.aliments[2], self.aliments[3], self.aliments[4], self.aliments[5], self.aliments[6], self.aliments[7], self.aliments[8], self.aliments[9]]
         columns_d = list(sondage.columns.values)
         data_d = dict(zip(columns_d, elements))
-        #print(data_d)
         df = pd.DataFrame([data_d])
-        print(df)
         return df
 
 # Get a random aliment code from the excel database
@@ -79,24 +78,25 @@ def gen_id():
 
 
 # Fill the Excel with a person (add on another line)
-def fill_excel(p: Person):
-    with pd.ExcelWriter("Sondage.xlsx", mode="a", if_sheet_exists='overlay') as writer:
-        df_source = pd.read_excel('Sondage.xlsx', sheet_name='Feuil2')
-        #sondage.append(p.asDataFrame()).to_excel(writer, sheet_name="Feuil2")
-        appended_df = pd.concat([df_source, p.asDataFrame()])
-        appended_df.to_excel(writer, sheet_name="Feuil2")
+# df : dataframe with every entries
+def fill_excel(df):
+    with pd.ExcelWriter("Sondage.xlsx", engine="openpyxl", mode="a", if_sheet_exists="overlay") as writer:
+        df.to_excel(writer, sheet_name="Feuil2")
 
 # todo : add 10 aliments to the person, and write to the excel
 
 def poll(n: int):
-    df = NULL
+    df_all = pd.DataFrame()
     for i in range (0, n):
         p = gen_id()
-        fill_excel(p)
+        df = p.asDataFrame()
+        df_all = pd.concat([df_all, df])
+    fill_excel(df_all)
+    print(df_all)
 
 
 def main(): 
-    poll(10)
+    poll(100)
 
 if __name__ == '__main__':
     main()
