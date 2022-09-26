@@ -96,7 +96,7 @@ def poll(n: int):
 
 
 def main(): 
-    poll(100)
+    poll(10000)
 
 if __name__ == '__main__':
     main()
