@@ -1,7 +1,7 @@
 import random
 import pandas as pd
-from modules.Person import Person
-from modules.Aliments import Classes
+from Person import Person
+from Aliments import Classes
 
 persons = pd.read_excel('Persons.xlsx', sheet_name='Persons')
 postal_codes = (76910, 76260, 76270, 76470, 76400, 76370)
@@ -29,8 +29,8 @@ def gen_id(categ):
 # Fill the Excel with a person (add on another line)
 # df : dataframe with every entries
 def fill_excel(df):
-    with pd.ExcelWriter("Sondage.xlsx", engine="openpyxl", mode="a", if_sheet_exists="overlay") as writer:
-        df.to_excel(writer, sheet_name="Feuil2")
+    with pd.ExcelWriter("Sondage.xlsx", engine="openpyxl", mode="a", if_sheet_exists="replace") as writer:
+        df.to_excel(writer, sheet_name="Feuil2", index=False)
 
 def poll(n: int):
     df_all = pd.DataFrame()
