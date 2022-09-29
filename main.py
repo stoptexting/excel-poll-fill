@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from modules.Statistics import Statistics
 from modules.filler import poll
 import sys,os
 import time
@@ -36,6 +37,10 @@ def main():
 
     try:
         poll(how_many)
+        s = Statistics()
+        s.show_graph()
+        print(s.most_chosen_categories_tostring())
+        
     except Exception as err:
         print(err)
 
