@@ -69,10 +69,12 @@ class Person:
 
         for alim in self.aliments:
             alim_row = aliments_df.loc[aliments_df['alim_code'] == alim]
-            print("alim avant replace ", alim, " ", alim_row.values)
+            
             alim_row = alim_row[['Sucres (g/100 g)', 'Sel chlorure de sodium (g/100 g)', 'AG saturés (g/100 g)', 'Polyols totaux (g/100 g)', 'Protéines, N x 625 (g/100 g)', 'Fibres alimentaires (g/100 g)']]
+            print("--------------- alim avant replace ", alim, " ", alim_row.values)
             # if regex not here, replace not working!!!!!!!!!!!!
-            alim_row = alim_row.stack().str.replace("-", "0", regex=True).str.replace('[A-Za-z]', '', regex=True).str.replace(',', '.', regex=True).str.replace('<', '', regex=True).str.replace(' ', '', regex=True).str.replace('', '0', regex=True).unstack()
+            alim_row = alim_row.stack().str.replace(',', '.', regex=True).str.replace('[A-Za-z]', '', regex=True).str.replace('[-]', '0', regex=True).str.replace('[< ]', '', regex=True).str.replace('^$', '0', regex=True).unstack()
+            print("-------------- alim après replace", alim, " ", alim_row.values)
             #print(alim_row)
             # Scoring method
             # 1 - Sugar
@@ -93,7 +95,7 @@ class Person:
             proteins += float(0.0 if 'Protéines, N x 625 (g/100 g)' not in alim_row.keys() else alim_row['Protéines, N x 625 (g/100 g)'])
             fibers += float(0.0 if 'Fibres alimentaires (g/100 g)' not in alim_row.keys() else alim_row['Fibres alimentaires (g/100 g)'])
             print("after", [sugar, salt, transfat, polyols, proteins, fibers])
-            time.sleep(10)
+
         # df_all = pd.DataFrame()
         # for alim in self.aliments:
         #     # print(self.aliments)
