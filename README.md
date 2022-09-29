@@ -8,3 +8,8 @@
 - [ ] Faire les jointures Aliments - Nutrition Facts - G
 - [ ] Faire statistiques Python Pyplot graphique proportion vegan... dans population - G
 - [ ] Faire statistiques report proportion vegan... dans population - G
+
+dependencies : 
+- openpyxl
+- pandas
+- random
