@@ -5,7 +5,7 @@ import os
 class Classes:
     def __init__(self, aliments_df = pd.read_excel('Aliments.xlsx')) -> None:
         self.aliments = aliments_df
-        self.classes = {"bio": [], "vegan": [], "casher": [], "halal": [], "none": []}
+        self.classes = {"bio": [], "vegan": [], "casher": [], "halal": [], "no_categ": []}
         self.fill_classes()
 
     # groupe_bio : is bio/vegan or not, groupe_spe : others
@@ -22,7 +22,7 @@ class Classes:
             elif ('halal' in group_spe):
                 self.classes["halal"].append(code)
             else:
-                self.classes["none"].append(code)
+                self.classes["no_categ"].append(code)
         print("Done")
 
     # Only a certain class of aliments, categ : the category
@@ -30,7 +30,7 @@ class Classes:
         aliments = []
         categ = categ.lower()
         if (categ not in self.classes.keys()):
-            raise "category does not exist. available categories : vegan, bio, casher, halal or none."
+            raise "category does not exist. available categories : vegan, bio, casher, halal or no_categ."
 
         while len(aliments) != n:
             rand = self.classes[categ][random.randrange(0, len(self.classes[categ]))]
@@ -41,7 +41,7 @@ class Classes:
     # Mixed results, only vegan, bio and aliments without group
     def random(self, n: int):
         aliments = []
-        allowed = ['vegan', 'bio', 'none']
+        allowed = ['vegan', 'bio', 'no_categ']
         while len(aliments) != n:
             categ = allowed[random.randrange(0, len(allowed))]
             rand = self.classes[categ][random.randrange(0, len(self.classes[categ]))]
