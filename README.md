@@ -13,3 +13,5 @@ dependencies :
 - openpyxl
 - pandas
 - random
+- pyplot
+- (requests)
