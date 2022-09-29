@@ -1,7 +1,7 @@
 import random
 import pandas as pd
-from Person import Person
-from Aliments import Classes
+from modules.Person import Person
+from modules.Aliments import Classes
 
 persons = pd.read_excel('Persons.xlsx', sheet_name='Persons')
 postal_codes = (76910, 76260, 76270, 76470, 76400, 76370)
