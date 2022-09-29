@@ -1,7 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as pyplot
-from modules.filler import MAX_ALIMENTS
-
+from filler import MAX_ALIMENTS
 
 class Statistics:
     def __init__(self, sondage = pd.read_excel('Sondage.xlsx', sheet_name='Feuil2'), aliments_df = pd.read_excel('Aliments.xlsx')) -> None:
@@ -46,3 +45,6 @@ class Statistics:
         pyplot.show()
 
     
+
+s = Statistics()
+s.show_graph

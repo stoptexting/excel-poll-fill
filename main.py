@@ -38,10 +38,11 @@ def main():
     try:
         poll(how_many)
         s = Statistics()
-        s.show_graph()
+        s.show_graph() # 10 the first time because past sheet loaded (6+4=10 aliments)
         print(s.most_chosen_categories_tostring())
-        
+
     except Exception as err:
+        print("lol bruh")
         print(err)
 
     print ("Job done in %0.4f seconds" % (time.time() - startTime))

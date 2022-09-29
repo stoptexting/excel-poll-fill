@@ -17,11 +17,11 @@ class Person:
         self.city = city
         self.phone = phone
         self.aliments = aliments
-        self.code_cli = self.format_codecli()
-
-    def format_codecli(self):
-        return self.prenom[0:2].upper() + self.nom[0:3] if self.nom[2] != " " else self.prenom[0:2].upper() + self.nom[0:2] + self.nom[3]
-
+        self.code_cli = self.format_codecli(self.nom, self.prenom)
+        
+    @staticmethod
+    def format_codecli(nom, prenom):
+        return prenom[0:2].upper() + nom[0:3] if nom[2] != " " else prenom[0:2].upper() + nom[0:2] + nom[3]
 
     def getAdminId(self):
         chosen = random.randint(0, MAX_ADMIN)
