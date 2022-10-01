@@ -2,6 +2,7 @@
 
 from modules.Statistics import Statistics
 from modules.filler import poll
+from modules.Scoring import HealthScore
 import sys,os
 import time
 import argparse
@@ -36,9 +37,11 @@ def main():
         return
 
     try:
-        poll(how_many)
+        #poll(how_many)
         s = Statistics()
+        sc = HealthScore()
         s.show_graph() # 10 the first time because past sheet loaded (6+4=10 aliments)
+        sc.show_graph_healthy()
         print(s.most_chosen_categories_tostring())
 
     except Exception as err:
@@ -49,7 +52,7 @@ def main():
     return
 
 if __name__ == '__main__':
-    sys.argv = ["main.py","--input","Aliments.xlsx","--output","Sondage.xlsx","--nb","100"]
+    sys.argv = ["main.py","--input","Aliments.xlsx","--output","Sondage.xlsx","--nb","100000"]
     main()
     os.system("pause")
     

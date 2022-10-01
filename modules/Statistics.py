@@ -1,6 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as pyplot
-from filler import MAX_ALIMENTS
+from modules.filler import MAX_ALIMENTS
 
 class Statistics:
     def __init__(self, sondage = pd.read_excel('Sondage.xlsx', sheet_name='Feuil2'), aliments_df = pd.read_excel('Aliments.xlsx')) -> None:
@@ -11,10 +11,12 @@ class Statistics:
         self.most_chosen_categories()
 
     def most_chosen_categories(self):
+        print("Calculating most chosen categories")
         for i in range(MAX_ALIMENTS):
             for j in range(self.sondage.shape[0]):
                 alim = self.alimentados.get(self.sondage['Aliment{}'.format(i+1)][j])
                 self.categories_count[self.which_categ(alim[0], alim[1])] += 1
+        print("Done")
     
     def most_chosen_categories_tostring(self):
         output = "Categories ranking (desc.)\n"
@@ -43,6 +45,7 @@ class Statistics:
         pyplot.pie(x, labels = self.categories_count.keys())
         pyplot.legend()
         pyplot.show()
+
 
     
 
