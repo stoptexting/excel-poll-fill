@@ -9,7 +9,7 @@
 - [x] Faire statistiques Python Pyplot graphique proportion vegan... dans population - G
 - [x] Faire statistiques report proportion vegan... dans population - G
 
-dependencies : 
+dependencies :  
 matplotlib==3.6.0
   - contourpy [required: >=1.0.1, installed: 1.0.5]
     - numpy [required: >=1.16, installed: 1.23.3]
