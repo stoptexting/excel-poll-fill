@@ -1,5 +1,5 @@
 # Excel Poll Fill
-
+used to complete SAE 3.1 : https://github.com/stoptexting/criel-sur-mer-website-rework
 > py ./main.py
 
 - [x] Call database gen et plus un api (optimisation)
